@@ -1,20 +1,32 @@
 <%= form_with(model: task, local: true) do |form| %>
-  <div>
+
+  <% if task.errors.any? %>
+    <div class="error-box">
+      <strong>入力にエラーがあります：</strong>
+      <ul>
+        <% task.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="form-group">
     <%= form.label :title, "タイトル" %><br>
-    <%= form.text_field :title %>
+    <%= form.text_field :title, class: "form-control" %>
   </div>
 
-  <div style="margin-top: 10px;">
+  <div class="form-group">
     <%= form.label :content, "内容" %><br>
-    <%= form.text_area :content %>
+    <%= form.text_area :content, class: "form-control", rows: 4 %>
   </div>
 
-  <div style="margin-top: 10px;">
+  <div class="form-group">
     <%= form.label :deadline, "期限" %><br>
-    <%= form.date_field :deadline %>
+    <%= form.date_field :deadline, class: "form-control" %>
   </div>
 
   <div style="margin-top: 20px;">
-    <%= form.submit "保存する" %>
+    <%= form.submit "保存する", class: "btn btn-submit" %>
   </div>
 <% end %>
